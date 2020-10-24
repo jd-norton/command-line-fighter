@@ -1,7 +1,8 @@
+from villians import villain
+import random
+
 YourHealth = 100
-DragonHealth = 200
 YourAttack = 25
-DragonAttack = 50
 SpecialAttackCounter = 0
 SpecialAttack = 0
 Defense = False
@@ -9,19 +10,31 @@ BattleOver = False
 DamagePotion = 3
 HealingPotion = 3
 
+#assigning a villain
+villain1 = random.choice(["Frog", "Tornado", "Dragon"])
+
+if villain1 == "Frog":
+    villain1 = villain("Frog", 50, 30)
+elif villain1 == "Tornado":
+    villain1 = villain("Tornado", 100, 40)
+else:
+    villain1 = villain("Dragon", 200, 50)
+
+
+
+
 def BattleAttack():
 
     global YourAttack
-    global DragonHealth
     global BattleOver
     
-    DragonHealth -= YourAttack
+    villain1.health -= YourAttack
     print ("Your attack is", YourAttack)
 
-    if DragonHealth > 0:
-        print("Dragons health is now", DragonHealth)
+    if villain1.health > 0:
+        print(villain1.name, "'s health is now", villain1.health)
     else:
-        print("Dragons health is now 0. Congratulations! you win!!!")
+        print(villain1.name, "'s health is now 0. Congratulations! you win!!!")
         BattleOver = True
 
     if YourAttack > 25:
@@ -82,7 +95,7 @@ def BattleSpecialAttack():
             SpecialAttack -=1
             YourAttack *= 3
             BattleAttack()
-            BattleDragonAttack(DragonAttack, Defense)
+            BattleVillainAttack(Defense)
         elif PlayerChoice == "No" or PlayerChoice == "no" or PlayerChoice == "N" or PlayerChoice == "n":
             print("You can use you special next turn if you want")
         else:
@@ -91,10 +104,8 @@ def BattleSpecialAttack():
 
     
 def BattleStatus():
-
-    global DragonHealth
             
-    print("You are fighting the great Dragon Maculon(",DragonHealth,"HP)")
+    print("You are fighting a(", villain1.name , " ", villain1.health,"HP)")
     print("What do you want to do? Your Health:", YourHealth)
     BattleMove = input("(1).Attack" + "\n(2).Defend" + "\n(3).Potions\n")
 
@@ -108,18 +119,19 @@ def BattleStatus():
         print("INVALID INPUT, PLEASE TRY AGAIN")
         BattleStatus()
 
-def BattleDragonAttack(DragonAttack, Defense):
+#villain method
+def BattleVillainAttack(Defense):
 
     global YourHealth
     global BattleOver
 
     if BattleOver == False:
         if Defense == True:
-            print("The dragon attacks, but you are defending")
-            YourHealth -= (DragonAttack / 2)
+            print("The ", villain1.name, " attacks, but you are defending")
+            YourHealth -= (villain1.attack / 2)
         else:
-            print("The dragons attacks! and deals", DragonAttack, "damage")
-            YourHealth -= DragonAttack
+            print("The ", villain1.name, " attacks! and deals", villain1.attack, "damage")
+            YourHealth -= villain1.attack
 
         if YourHealth >0:
             print("Your health is now", int(YourHealth))
@@ -135,6 +147,6 @@ while BattleOver == False:
         BattleStatus()
 
     if BattleOver == False:
-        BattleDragonAttack(DragonAttack, Defense)
+        BattleVillainAttack(Defense)
 
     SpecialAttackCounter += 1
