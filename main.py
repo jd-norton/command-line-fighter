@@ -18,7 +18,7 @@ def BattleAttack():
     DragonHealth -= YourAttack
     print ("Your attack is", YourAttack)
 
-    if DragonHealth >0:
+    if DragonHealth > 0:
         print("Dragons health is now", DragonHealth)
     else:
         print("Dragons health is now 0. Congratulations! you win!!!")
@@ -113,18 +113,19 @@ def BattleDragonAttack(DragonAttack, Defense):
     global YourHealth
     global BattleOver
 
-    if Defense == True:
-        print("The dragon attacks, but you are defending")
-        YourHealth -= (DragonAttack / 2)
-    else:
-        print("The dragons attacks! and deals", DragonAttack, "damage")
-        YourHealth -= DragonAttack
+    if BattleOver == False:
+        if Defense == True:
+            print("The dragon attacks, but you are defending")
+            YourHealth -= (DragonAttack / 2)
+        else:
+            print("The dragons attacks! and deals", DragonAttack, "damage")
+            YourHealth -= DragonAttack
 
-    if YourHealth >0:
-        print("Your health is now", int(YourHealth))
-    else:
-        print("Your health is 0. Game over")
-        BattleOver = True
+        if YourHealth >0:
+            print("Your health is now", int(YourHealth))
+        else:
+            print("Your health is 0. Game over")
+            BattleOver = True
     
 while BattleOver == False:
 
