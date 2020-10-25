@@ -4,6 +4,8 @@ from Player1 import Weapons
 from Player1 import Potions
 import random
 
+Boots, Belt, Breastplate, Gauntlets, Helmet = False
+ArmorCount = 0
 YourHealth = 100
 YourAttack = 25
 SpecialAttackCounter = 0
@@ -139,7 +141,32 @@ def BattleVillainAttack(Defense):
         else:
             print("Your health is 0. Game over ", player1.name)
             BattleOver = True
-    
+
+def BattleSuit(ArmorCount):
+    if Boots == True:
+        player1.health += 25
+        Boots = False
+        ArmorCount += 1
+    if Belt == True:
+        player1.health += 25
+        Belt = False
+        ArmorCount += 1
+    if Breastplate == True:
+        player1.health += 25
+        Breastplate = False
+        ArmorCount += 1
+    if Gauntlets == True:
+        player1.health += 25
+        Gauntlets = False
+        ArmorCount += 1
+    if Helmet == True:
+        player1.health += 25
+        Helmet = False
+        ArmorCount += 1
+
+if ArmorCount < 5:
+    BattleSuit(ArmorCount)
+
 while BattleOver == False:
 
     BattleSpecialAttack()
