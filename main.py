@@ -1,5 +1,7 @@
 from villians import villain
 from Player1 import PlayerOne
+from Player1 import Weapons
+from Player1 import Potions
 import random
 
 YourHealth = 100
@@ -15,6 +17,7 @@ playername = input("What is your name:")
 
 #assigning hero attributes
 player1 = PlayerOne(playername, YourHealth, YourAttack)
+allthepotions = Potions(HealingPotion, DamagePotion)
 
 #assigning a villain
 villain1 = random.choice(["Frog", "Tornado", "Dragon"])
@@ -52,27 +55,25 @@ def BattleDefense():
 
 def BattlePotions():
 
-    global HealingPotion
-    global DamagePotion
 
-    print("(1).Health Potion(",HealingPotion, ")\n(2).Damage(",DamagePotion, ")\n(B)Back")
+    print("(1).Health Potion(",allthepotions.health, ")\n(2).Damage(",allthepotions.damage, ")\n(B)Back")
     Potion = input("What Potions would you like to use?\n") 
     if Potion == "1" or Potion == "Health Potion" or Potion == "health potion":
-        if HealingPotion > 0:
+        if allthepotions.health > 0:
             player1.health += 50
-            HealingPotion -=1
+            allthepotions.health -=1
             print("Your health is now", player1.health)
-            print("You now have", HealingPotion, "Healing Potion/s")
+            print("You now have", allthepotions.health, "Healing Potion/s")
             BattlePotions()
         else:
             print("Sorry, you don't have anymore healing potions")
             BattlePotions()
     elif Potion == "2" or Potion == "Damage Potion" or Potion == "damage potion":
-        if DamagePotion > 0:
+        if allthepotions.damage > 0:
             player1.attack += 25
-            DamagePotion -=1
+            allthepotions.damage -=1
             print("Your attack is now", player1.attack)
-            print("You now have", DamagePotion, "Damage Potion/s")
+            print("You now have", allthepotions.damage, "Damage Potion/s")
             BattlePotions()
         else:
             print("Sorry, you don't have anymore damage potions")
