@@ -1,4 +1,5 @@
 from villians import villain
+from Player1 import PlayerOne
 import random
 
 YourHealth = 100
@@ -9,6 +10,11 @@ Defense = False
 BattleOver = False
 DamagePotion = 3
 HealingPotion = 3
+
+playername = input("What is your name:") 
+
+#assigning hero attributes
+player1 = PlayerOne(playername, YourHealth, YourAttack)
 
 #assigning a villain
 villain1 = random.choice(["Frog", "Tornado", "Dragon"])
@@ -25,20 +31,18 @@ else:
 
 def BattleAttack():
 
-    global YourAttack
     global BattleOver
     
-    villain1.health -= YourAttack
-    print ("Your attack is", YourAttack)
+    villain1.health -= player1.attack
+    print ("Your attack is", player1.attack)
 
     if villain1.health > 0:
         print(villain1.name, "'s health is now", villain1.health)
     else:
-        print(villain1.name, "'s health is now 0. Congratulations! you win!!!")
-        BattleOver = True
+        print(villain1.name, "'s health is now 0. Congratulations! you win", player1.name ,"!!!")
 
-    if YourAttack > 25:
-        YourAttack = 25
+    if player1.attack > YourAttack:
+        player1.attack = YourAttack
 
 def BattleDefense():
     
@@ -50,16 +54,14 @@ def BattlePotions():
 
     global HealingPotion
     global DamagePotion
-    global YourHealth
-    global YourAttack
 
     print("(1).Health Potion(",HealingPotion, ")\n(2).Damage(",DamagePotion, ")\n(B)Back")
     Potion = input("What Potions would you like to use?\n") 
     if Potion == "1" or Potion == "Health Potion" or Potion == "health potion":
         if HealingPotion > 0:
-            YourHealth += 50
+            player1.health += 50
             HealingPotion -=1
-            print("Your health is now", YourHealth)
+            print("Your health is now", player1.health)
             print("You now have", HealingPotion, "Healing Potion/s")
             BattlePotions()
         else:
@@ -67,9 +69,9 @@ def BattlePotions():
             BattlePotions()
     elif Potion == "2" or Potion == "Damage Potion" or Potion == "damage potion":
         if DamagePotion > 0:
-            YourAttack += 10
+            player1.attack += 25
             DamagePotion -=1
-            print("Your attack is now", YourAttack)
+            print("Your attack is now", player1.attack)
             print("You now have", DamagePotion, "Damage Potion/s")
             BattlePotions()
         else:
@@ -84,7 +86,6 @@ def BattleSpecialAttack():
 
     global SpecialAttackCounter
     global SpecialAttack
-    global YourAttack
     
     if SpecialAttackCounter % 4 == 0 and SpecialAttackCounter != 0:
         SpecialAttack += 1
@@ -93,7 +94,7 @@ def BattleSpecialAttack():
         PlayerChoice = input("Your special ability is active. Do you want to use it? (Y) OR (N)")
         if PlayerChoice == "Yes" or PlayerChoice == "yes" or PlayerChoice == "Y" or PlayerChoice == "y":
             SpecialAttack -=1
-            YourAttack *= 3
+            player1.attack *= 3
             BattleAttack()
             BattleVillainAttack(Defense)
         elif PlayerChoice == "No" or PlayerChoice == "no" or PlayerChoice == "N" or PlayerChoice == "n":
@@ -106,7 +107,7 @@ def BattleSpecialAttack():
 def BattleStatus():
             
     print("You are fighting a(", villain1.name , " ", villain1.health,"HP)")
-    print("What do you want to do? Your Health:", YourHealth)
+    print("What do you want to do?", player1.name, "Your Health:", player1.health)
     BattleMove = input("(1).Attack" + "\n(2).Defend" + "\n(3).Potions\n")
 
     if BattleMove == "1" or BattleMove == "Attack" or BattleMove == "attack":
@@ -122,21 +123,20 @@ def BattleStatus():
 #villain method
 def BattleVillainAttack(Defense):
 
-    global YourHealth
     global BattleOver
 
     if BattleOver == False:
         if Defense == True:
             print("The ", villain1.name, " attacks, but you are defending")
-            YourHealth -= (villain1.attack / 2)
+            player1.health -= (villain1.attack / 2)
         else:
             print("The ", villain1.name, " attacks! and deals", villain1.attack, "damage")
-            YourHealth -= villain1.attack
+            player1.health -= villain1.attack
 
-        if YourHealth >0:
-            print("Your health is now", int(YourHealth))
+        if player1.health > 0:
+            print("Your health is now", player1.health)
         else:
-            print("Your health is 0. Game over")
+            print("Your health is 0. Game over ", player1.name)
             BattleOver = True
     
 while BattleOver == False:
