@@ -33,8 +33,7 @@ if villain1 == "Frog":
 elif villain1 == "Tornado":
     villain1 = villain("Tornado", 100, 40)
 else:
-    villain1 = villain("Dragon", 200, 50)
-
+    villain1 = villain("Dragon", 300, 50)
 
 
 
@@ -49,6 +48,7 @@ def BattleAttack():
         print(villain1.name, "'s health is now", villain1.health)
     else:
         print(villain1.name, "'s health is now 0. Congratulations! you win", player1.name ,"!!!")
+        BattleOver= True
 
     if player1.attack > YourAttack:
         player1.attack = YourAttack
@@ -180,6 +180,7 @@ if ArmorCount < 5:
     BattleSuit()
 
 while BattleOver == False:
+
 
     BattleSpecialAttack()
 

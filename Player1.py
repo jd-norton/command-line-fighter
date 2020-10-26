@@ -5,15 +5,48 @@ class PlayerOne:
         self.attack = attack
 
 class Weapons:
-    def __init__(self, sword, armor):
-        self.sword = sword
+    def __init__(self, swordtype, swordattack, armor):
+        self.swordtype = swordtype
+        self.swordattack = swordattack
         self.armor = armor
-#if Weapons.armor == "Left Boot":
-    #PlayerOne.health += 50
-
 
 class Potions:
     def __init__(self, health, damage):
         self.health = health
         self.damage = damage
-        
+
+'''
+YourAttack = 25
+
+def itsasword():
+    weapons = ["Wooden Sword", "Bronze Sword", "Iron Sword", "Steel Sword", "Steel Greatsword"]
+
+    global YourAttack
+    swordtype = ""
+
+    for i in weapons[4]:
+        if i == 0:
+            swordtype = weapons[i]
+            YourAttack += 25
+            i += 1
+        elif i == 1:
+            swordtype = weapons[i]
+            YourAttack += 25
+            i += 1
+        elif i == 2:
+            swordtype = weapons[i]
+            YourAttack += 25
+            i += 1
+        elif i == 3:
+            swordtype = weapons[i]
+            YourAttack += 25
+            i += 1
+        else:
+            swordtype = weapons[i]
+            YourAttack += 25
+            i += 1
+    return swordtype
+
+for i in range(5):
+    print(itsasword(), YourAttack)
+'''   
